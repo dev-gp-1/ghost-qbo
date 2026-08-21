@@ -1,0 +1,9 @@
+{
+  "name": "ghost-qbo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cursor / Claude Code skill: official Intuit QBO MCP, one connector per client. For Claude users moving to Cursor.",
+  "license": "MIT",
+  "keywords": ["agent-skill", "cursor", "cursor-skill", "claude-code", "quickbooks", "qbo", "intuit", "mcp", "ghost-protocol"],
+  "files": ["SKILL.md", "references", "AGENTS.md"]
+}
