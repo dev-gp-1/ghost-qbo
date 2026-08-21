@@ -1,10 +1,10 @@
 ---
 name: ghost-qbo
-description: Connect QuickBooks Online in Cursor via official Intuit MCP. One connector per client, own realm and TOKEN_STORE_PATH, official QUICKBOOKS_* env names, get_company_info / search_* / 11 reports. Use when the user says QBO, QuickBooks, Intuit MCP, one connector per client, attach sandbox, P&L, AR aging, Claude QuickBooks connector, or /firm-mode qbo. Not Desktop Web Connector.
+description: Connect QuickBooks Online in Cursor via official Intuit MCP. One connector per client, own realm and TOKEN_STORE_PATH, official QUICKBOOKS_* env names, get_company_info / search_* / 11 reports. Use when the user says QBO, QuickBooks, Intuit MCP, one connector per client, attach sandbox, P&L, AR aging, Claude QuickBooks connector, or /firm-mode qbo. Not Desktop Web Connector. Require ~/.ghost-qbo/unlocked before live attach.
 license: MIT
 metadata:
   author: Ghost Protocol / Richard
-  version: "1.0.0"
+  version: "1.1.0"
   homepage: ghostprotocol.us
   related: dev-gp-1/ghost-handoff
 ---
@@ -15,7 +15,22 @@ Claude.ai has a native QuickBooks connector. Cursor does not. Use official Intui
 
 Desktop Web Connector (.qwc / SOAP / local Windows) is a different product. Do not install QBWC for this.
 
-Never print Client Secret, refresh tokens, or access tokens. Never mix two clients in one MCP process.
+Never print Client Secret, refresh tokens, or access tokens. Never mix two clients in one MCP process. Never print the share-code hash as a password.
+
+## Unlock before live attach
+
+`npx skills add` has no password. Before attaching a live QBO company, require this marker:
+
+```bash
+python3 ~/.cursor/skills/ghost-qbo/scripts/unlock.py --status
+# locked -> ask the user for the share code from Ghost Protocol, then:
+python3 ~/.cursor/skills/ghost-qbo/scripts/unlock.py
+# or GHOST_QBO_SHARE_CODE=... python3 .../unlock.py
+```
+
+If status is locked, stop. Do not copy token stores. Do not run Intuit OAuth. Do not call get_company_info against a live realm. Demo/docs are fine.
+
+See references/auth.md. Private GitHub is the real install lock; this marker is the use lock.
 
 ## When to use
 
@@ -40,9 +55,11 @@ Never print Client Secret, refresh tokens, or access tokens. Never mix two clien
 
 Claude.ai native connector is consumer Intuit sign-in, one company, chat P&L. This skill is Intuit Developer app + refresh token, many clients, MCP tool names, sandbox or production.
 
-Friends shifting over: install this skill, clone official MCP, paste tokens into that client's store, point MCP at that store. See references/claude-to-cursor.md.
+Friends shifting over: install this skill, unlock, clone official MCP, paste tokens into that client's store, point MCP at that store. See references/claude-to-cursor.md.
 
 ## Attach (live)
+
+Only after unlock status is unlocked.
 
 1. Register an app on developer.intuit.com with scope com.intuit.quickbooks.accounting.
 2. Sandbox redirect: http://localhost:8000/callback. Production needs public HTTPS.
@@ -73,6 +90,7 @@ Do not log secrets. Do not enable writes to try it. Access tokens refresh 5 minu
 
 ## Troubleshooting
 
+- unlock.py locked: ask Ghost Protocol for the share code
 - invalid_grant / 401: re-authorize; verify CLIENT_ID + SECRET
 - Wrong company: wrong token store. Stop. Switch file. Restart MCP
 - Claude connector habits: this is not claude.ai. Use MCP tool names
@@ -83,4 +101,5 @@ Do not log secrets. Do not enable writes to try it. Access tokens refresh 5 minu
 
 ```bash
 npx skills add dev-gp-1/ghost-qbo -g -a cursor
+python3 ~/.cursor/skills/ghost-qbo/scripts/unlock.py
 ```
