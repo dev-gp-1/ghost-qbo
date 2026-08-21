@@ -6,8 +6,11 @@ Cursor / Claude Code skill for QuickBooks Online via official Intuit MCP. One co
 
 ```bash
 npx skills add . -g -a cursor
+python3 scripts/unlock.py
 # published:
 npx skills add dev-gp-1/ghost-qbo -g -a cursor
 ```
 
-When the user wants QBO, QuickBooks, Intuit MCP, or `/firm-mode qbo`, follow SKILL.md. Pick the client first. Never mix realms. Never print secrets.
+Before a live attach, require `~/.ghost-qbo/unlocked` (run scripts/unlock.py). If missing, stop and ask the user for the share code from Ghost Protocol. Never print the hash as a password. Never print QBO secrets.
+
+When the user wants QBO, QuickBooks, Intuit MCP, or `/firm-mode qbo`, follow SKILL.md. Pick the client first. Never mix realms.
