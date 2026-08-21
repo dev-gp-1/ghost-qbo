@@ -1,2 +1,7 @@
-# ghost-qbo
-Cursor / Claude Code skill: official Intuit QBO MCP, one connector per client. For Claude users moving to Cursor — not Desktop Web Connector.
+# Ghost QBO
+
+Cursor / Claude Code skill for official Intuit QBO MCP. One connector per client.
+
+```bash
+npx skills add dev-gp-1/ghost-qbo -g -a cursor
+```
