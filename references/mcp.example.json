@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "quickbooks": {
+      "command": "node",
+      "args": ["/ABS/PATH/quickbooks-online-mcp-server/dist/index.js"],
+      "env": {
+        "QUICKBOOKS_TOKEN_STORE_PATH": "/ABS/PATH/token-stores/cota.env",
+        "QUICKBOOKS_DISABLE_WRITE": "true",
+        "QUICKBOOKS_DISABLE_UPDATE": "true",
+        "QUICKBOOKS_DISABLE_DELETE": "true"
+      }
+    }
+  }
+}
