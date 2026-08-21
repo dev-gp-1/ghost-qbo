@@ -1,0 +1,33 @@
+clients:
+  - id: gp
+    name: Ghost Protocol LLC
+    code: GP
+    environment: demo
+    token_store: token-stores/gp.env
+    disable_write: true
+    disable_update: true
+    disable_delete: true
+  - id: cota
+    name: Central Ohio Transit Authority
+    code: COTA
+    environment: sandbox
+    token_store: token-stores/cota.env
+    disable_write: true
+    disable_update: true
+    disable_delete: true
+  - id: hmns
+    name: Houston Museum of Natural Science
+    code: HMNS
+    environment: sandbox
+    token_store: token-stores/hmns.env
+    disable_write: true
+    disable_update: true
+    disable_delete: true
+  - id: westloop
+    name: Westloop Property Group
+    code: WESTLOOP
+    environment: production
+    token_store: token-stores/westloop.env
+    disable_write: true
+    disable_update: true
+    disable_delete: true
